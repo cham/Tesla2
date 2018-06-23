@@ -1,0 +1,26 @@
+{
+  "name": "Tesla2",
+  "version": "0.0.1",
+  "description": "Telsa 2 forum system API",
+  "author": "Dan Neame <dan@nea.me>",
+  "private": true,
+  "scripts": {
+    "dev": "./run-dev.sh",
+    "start": "npm run dev",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "body-parser": "1.18.2",
+    "cors": "2.8.4",
+    "express": "4.16.3",
+    "jsonwebtoken": "8.3.0"
+  },
+  "devDependencies": {
+    "eslint": "4.15.0",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-node": "5.2.0",
+    "eslint-plugin-promise": "3.4.0",
+    "eslint-plugin-standard": "3.0.1"
+  }
+}
