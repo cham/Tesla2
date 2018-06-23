@@ -20,7 +20,7 @@ const generateToken = payload => new Promise((resolve, reject) => {
   })
 })
 
-exports.login = (username, password) => new Promise((resolve, reject) => {
+const login = (username, password) => new Promise((resolve, reject) => {
   db.getConnection()
     .then(() => db.User.findOne({ username }, (err, user) => {
       if (err) {
@@ -37,4 +37,5 @@ exports.login = (username, password) => new Promise((resolve, reject) => {
     .catch(reject)
 })
 
+exports.login = login
 exports.verify = verifyToken
