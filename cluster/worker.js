@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.use('/v1/auth', require('../routes/auth'))
+app.use('/v1/threads', require('../routes/threads'))
 
 app.listen(port, () => {
   console.log(`Worker listening on port ${port}`);
