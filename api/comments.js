@@ -1,8 +1,8 @@
 const db = require('../db')
 
-const getComments = () => new Promise((resolve, reject) => {
+const getComments = filter => new Promise((resolve, reject) => {
   db.getConnection()
-    .then(() => db.Comment.find()
+    .then(() => db.Comment.find(filter)
       .limit(50)
       .sort('-created')
       .exec((err, comments) => {
