@@ -14,4 +14,18 @@ const getThreads = () => new Promise((resolve, reject) => {
     )
 })
 
+const getThread = filter => new Promise((resolve, reject) => {
+  db.getConnection()
+    .then(() => db.Thread.find(filter, (err, thread) => {
+      if (err) {
+        return reject(err)
+      }
+      if (!thread) {
+        return reject(new Error('Thread not found'))
+      }
+      resolve(thread)
+    }))
+})
+
 exports.getThreads = getThreads
+exports.getThread = getThread
