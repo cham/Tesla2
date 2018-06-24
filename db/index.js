@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const User = require('./User')
 const Thread = require('./Thread')
+const Comment = require('./Comment')
 
 const makeConnection = () => {
   mongoose.connect('mongodb://localhost/tesladb')
@@ -35,3 +36,4 @@ exports.getConnection = () => new Promise((resolve, reject) => {
 
 exports.User = User
 exports.Thread = Thread
+exports.Comment = Comment
