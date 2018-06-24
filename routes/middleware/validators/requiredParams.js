@@ -2,6 +2,7 @@ const idRegex = /[0-9a-f]{24}/
 const base64Regex = /^data:image\/[a-z]+;base64,/
 const bcryptRegex = /^\$2b\$.{56}$/
 const jwtRegex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
+const slugRegex = /^[0-9a-zA-Z-]{1,}$/
 
 module.exports = (body, validationSchema) => {
   const failures = []
@@ -46,6 +47,11 @@ module.exports = (body, validationSchema) => {
           failures.push(key)
         }
         break
+      case 'Slug':
+        if (!body[key].match(slugRegex) || body[key].length > validationSchema[key].maxLength) {
+          failures.push(key)
+        }
+        break;
       default:
         failures.push(key)
         break
