@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "./run-dev.sh",
-    "start": "npm run dev",
+    "start": "./run-production.sh",
     "lint": "eslint ."
   },
   "dependencies": {
