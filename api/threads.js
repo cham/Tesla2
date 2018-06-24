@@ -1,4 +1,5 @@
 const db = require('../db')
+const commentsApi = require('./comments')
 
 const getThreads = () => new Promise((resolve, reject) => {
   db.getConnection()
@@ -14,14 +15,20 @@ const getThreads = () => new Promise((resolve, reject) => {
     )
 })
 
-const getThread = filter => new Promise((resolve, reject) => {
+const getThread = (filter, options) => new Promise((resolve, reject) => {
   db.getConnection()
-    .then(() => db.Thread.find(filter, (err, thread) => {
+    .then(() => db.Thread.findOne(filter, (err, thread) => {
       if (err) {
         return reject(err)
       }
       if (!thread) {
         return reject(new Error('Thread not found'))
+      }
+      thread = thread.toObject()
+      if (options && options.populate) {
+        return commentsApi.getComments({ threadid: thread._id })
+          .then(comments => resolve(Object.assign({}, { comments }, thread)))
+          .catch(reject)
       }
       resolve(thread)
     }))
