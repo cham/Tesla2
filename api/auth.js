@@ -32,7 +32,9 @@ const login = (username, password) => new Promise((resolve, reject) => {
       if (!bcrypt.compareSync(password, user.password)) {
         return reject(new Error('Invalid credentials'))
       }
-      resolve(generateToken(user.toObject()))
+      resolve(generateToken({
+        userId: user._id
+      }))
     }))
     .catch(reject)
 })
