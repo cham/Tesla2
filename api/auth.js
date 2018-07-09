@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const db = require('../db')
 const bcrypt = require('bcrypt')
+const mapper = require('./mappers/auth')
 
 const verifyToken = token => new Promise((resolve, reject) => {
   jwt.verify(token, process.env.NS_TESLA_JWT_SECRET, (err, tokenData) => {
@@ -32,9 +33,7 @@ const login = (username, password) => new Promise((resolve, reject) => {
       if (!bcrypt.compareSync(password, user.password)) {
         return reject(new Error('Invalid credentials'))
       }
-      resolve(generateToken({
-        userId: user._id
-      }))
+      resolve(generateToken(mapper.tokenPayload(user.toObject())))
     }))
     .catch(reject)
 })

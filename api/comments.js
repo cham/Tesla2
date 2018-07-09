@@ -1,17 +1,11 @@
 const db = require('../db')
 
-const getComments = filter => new Promise((resolve, reject) => {
-  db.getConnection()
-    .then(() => db.Comment.find(filter)
-      .limit(50)
-      .sort('-created')
-      .exec((err, comments) => {
-        if (err) {
-          return reject(err)
-        }
-        resolve(comments)
-      })
-    )
-})
+const getComments = (filter, options) => db.getConnection()
+  .then(() => db.Comment.find(filter)
+    .skip(options.skip)
+    .limit(options.limit)
+    .sort(options.sort)
+    .exec()
+  )
 
 exports.getComments = getComments
